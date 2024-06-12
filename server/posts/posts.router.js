@@ -9,8 +9,10 @@ router.get('/', async (req, res) => {
 
   const postsWithImagesPromises = posts.map(async post => {
     const postImages = await fetchPostImages({ postId: post.id });
+    const user = await fetchUserById(post.userId);
     return {
       ...post,
+      user,
       images: postImages,
     };
   });
