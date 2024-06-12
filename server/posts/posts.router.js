@@ -5,7 +5,9 @@ const { fetchUserById } = require('../users/users.service');
 const router = express.Router();
 
 router.get('/', async (req, res) => {
-  const posts = await fetchPosts();
+  const { start, limit } = req.query;
+
+  const posts = await fetchPosts({ start, limit });
 
   const postsWithImagesPromises = posts.map(async post => {
     const postImages = await fetchPostImages({ postId: post.id });
