@@ -23,4 +23,19 @@ async function fetchPosts(params) {
   return posts;
 }
 
-module.exports = { fetchPosts };
+/**
+ * Fetches posts images from a remote API.
+ * @async
+ * @param {Object} [params] - The parameters for fetching post images.
+ * @returns {Promise<Array>} - A promise that resolves to an array of posts.
+ */
+async function fetchPostImages(params) {
+  const { postId } = params || {};
+  const { data: postImages } = await axios.get(
+    `https://jsonplaceholder.typicode.com/albums/${postId}/photos`,
+  );
+
+  return postImages;
+}
+
+module.exports = { fetchPosts, fetchPostImages };

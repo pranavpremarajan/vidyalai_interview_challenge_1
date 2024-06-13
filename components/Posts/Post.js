@@ -57,10 +57,12 @@ const Button = styled.button(() => ({
 
 const PrevButton = styled(Button)`
   left: 10px;
+  top: calc(50% - 25px);
 `;
 
 const NextButton = styled(Button)`
   right: 10px;
+  top: calc(50% - 25px);
 `;
 
 const Post = ({ post }) => {
@@ -69,7 +71,7 @@ const Post = ({ post }) => {
   const handleNextClick = () => {
     if (carouselRef.current) {
       carouselRef.current.scrollBy({
-        left: 50,
+        left: 300,
         behavior: 'smooth',
       });
     }
@@ -78,7 +80,7 @@ const Post = ({ post }) => {
   const handlePrevClick = () => {
     if (carouselRef.current) {
       carouselRef.current.scrollBy({
-        left: -70,
+        left: -300,
         behavior: 'smooth',
       });
     }
@@ -86,6 +88,33 @@ const Post = ({ post }) => {
 
   return (
     <PostContainer>
+      <div style={{ display: 'flex', padding: '10px' }}>
+        <div
+          style={{
+            backgroundColor: 'grey',
+            padding: '10px',
+            borderRadius: '100%',
+            height: '30px',
+            width: '30px',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            color: 'white',
+            fontWeight: 'bold',
+          }}
+        >
+          {post.user.name
+            .split(' ')
+            .map(name => name.substr(0, 1))
+            .join('')}
+        </div>
+        <div style={{ marginLeft: '10px' }}>
+          <div>
+            <b>{post.user.name}</b>
+          </div>
+          <div>{post.user.email}</div>
+        </div>
+      </div>
       <CarouselContainer>
         <Carousel ref={carouselRef}>
           {post.images.map((image, index) => (
